@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Alert, Button } from 'react-native'
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons'
+import Header from './Components/Header'
 
 export default class App extends React.Component{
 
@@ -83,13 +84,14 @@ export default class App extends React.Component{
     //checking for winner
     var winner = this.getWinner();
     if (winner == 1){
-      Alert.alert("Player 1 is the Winner");
+      Alert.alert("YAYYYY", "Player 1 WON");
       this.initialiseGame();
     }
     else if(winner== -1){
-      Alert.alert("Player 2 is the Winner");
+      Alert.alert("YAYYYY", "Player 2 WON");
       this.initialiseGame();
     }
+
   }
 
   renderIcon = (row, col) => {
@@ -104,6 +106,8 @@ export default class App extends React.Component{
 
   render(){
     return(
+      <View style= {styles.main}>
+        <Header title= 'TIC TAC TOE' />
       <View style={styles.container}>
         <View style={{flexDirection: 'row'}}>
           <TouchableOpacity 
@@ -167,17 +171,28 @@ export default class App extends React.Component{
           </TouchableOpacity>
         </View>
      </View>
+        <TouchableOpacity style= {styles.restartbtn} >
+          <Button title= 'New Game' onPress={this.initialiseGame} color= '#451e3e'/>
+        </TouchableOpacity>
+     </View>
     );
   }
 }
 
 
 const styles = StyleSheet.create({
+
+  main: {
+    flex:1,
+    paddingTop:10,
+    backgroundColor: '#f0e4e4',
+  },
+
   container:{
     flex:1, 
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#f0e4e4',
   },
   tile:{
     height:120,
@@ -194,5 +209,11 @@ const styles = StyleSheet.create({
     fontSize: 75,
     padding: 20,
   },
-
+  restartbtn:{
+    backgroundColor: '#451e3e',
+        padding:10,
+        margin: 5,        
+        marginTop: 0,
+        marginBottom: 15,
+  },
 });
