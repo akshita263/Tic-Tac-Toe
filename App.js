@@ -211,9 +211,9 @@ const styles = StyleSheet.create({
   },
   restartbtn:{
     backgroundColor: '#451e3e',
-        padding:10,
-        margin: 5,        
-        marginTop: 0,
-        marginBottom: 15,
+    padding:10,
+    margin: 5,        
+    marginTop: 0,
+    marginBottom: 15,
   },
 });
