@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native'
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons'
 
 export default class App extends React.Component{
@@ -27,12 +27,69 @@ export default class App extends React.Component{
         [0, 0, 0],
         [0, 0, 0], 
         [0, 0, 0]
-      ] 
+      ] ,
+      currentPlayer: 1,
     });
   }
 
+  getWinner = () =>{
+    var sum;
+    var arr= this.state.gameState;
+
+    //checking rows
+    for( var i=0; i<3; i++){
+      sum= arr[i][0] + arr[i][1] + arr[i][2];
+      if(sum == 3) {return 1;}
+      else if(sum == -3) {return -1;}
+    }
+
+    //checking columns
+    for(var i=0 ; i<3; i++){
+      sum= arr[0][i] + arr[1][i] + arr[2][i];
+      if(sum == 3) {return 1;}
+      else if(sum == -3) {return -1;}
+    }
+
+    //checking diagonals
+    sum= arr[0][0] + arr[1][1] + arr[2][2];
+    if(sum == 3) {return 1;}
+    else if(sum == -3) {return -1;}
+
+    sum= arr[0][2] + arr[1][1] + arr[2][0] ;
+    if(sum == 3) {return 1;}
+    else if(sum == -3) {return -1;}
+
+    return 0;
+  }
+  
+
   onTilePress = (row, col) =>{
-    
+    //dont allow to click on tile already chosen
+    var value= this.state.gameState[row][col]
+    if(value !=0) {return; }
+
+    //getting value of current player
+    var currentPlayer = this.state.currentPlayer;
+   
+    //setting tiles
+    var arr = this.state.gameState.slice();
+    arr[row][col]= currentPlayer;
+    this.setState({gameState: arr});
+
+    //swapping the player
+    var nextPlayer= (currentPlayer == 1) ? -1 : 1;
+    this.setState({currentPlayer: nextPlayer});
+
+    //checking for winner
+    var winner = this.getWinner();
+    if (winner == 1){
+      Alert.alert("Player 1 is the Winner");
+      this.initialiseGame();
+    }
+    else if(winner== -1){
+      Alert.alert("Player 2 is the Winner");
+      this.initialiseGame();
+    }
   }
 
   renderIcon = (row, col) => {
