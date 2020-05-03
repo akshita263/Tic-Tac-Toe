@@ -113,6 +113,7 @@ export default class App extends React.Component{
           <TouchableOpacity 
           onPress= {()=> this.onTilePress(0, 0)}
           style={[styles.tile, {borderLeftWidth: 0, borderTopWidth: 0}]}>
+            
             {this.renderIcon(0,0)}
           </TouchableOpacity>
 
@@ -197,18 +198,20 @@ const styles = StyleSheet.create({
   tile:{
     height:120,
     width:120,
-    borderWidth: 5,
+    borderWidth: 8,
+    borderColor: '#451e3ef0',
   },
   iconx: {
     color:'red',
     fontSize: 90,
-    padding: 10,
+    padding: 7,
   },
   icono: {
     color:'green',
     fontSize: 75,
-    padding: 20,
+    padding: 15,
   },
+  
   restartbtn:{
     backgroundColor: '#451e3e',
     padding:10,
